@@ -39,3 +39,21 @@ func (r *Repository) CreateExamRepo(ctx context.Context, tx *gorm.DB, exam *mode
 	}
 	return nil
 }
+
+func (r *Repository) DeleteExamRepo(ctx context.Context, tx *gorm.DB, id string) error {
+	tx = tx.WithContext(ctx)
+	// 1. ลบ choice
+	if err := tx.Where("exam_id = ?", id).
+		Delete(&model.Choice{}).Error; err != nil {
+		return err
+	}
+	// 2. ลบ exam
+	result := tx.Delete(&model.Exam{}, "id = ?", id)
+	if result.Error != nil {
+		return result.Error
+	}
+	if result.RowsAffected == 0 {
+		return gorm.ErrRecordNotFound
+	}
+	return nil
+}

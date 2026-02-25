@@ -17,3 +17,8 @@ type NewExamToResponse struct {
 	Question string           `json:"question"`
 	Choices  []ChoiceResponse `json:"choices"`
 }
+
+type DeleteExamResponse struct {
+	ID      string `json:"id"`
+	Message string `json:"message"`
+}

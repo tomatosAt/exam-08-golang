@@ -48,3 +48,10 @@ func MapNewExamToResponse(e *model.Exam) *dto.NewExamToResponse {
 		Choices:  choices,
 	}
 }
+
+func MapDeleteExamToResponse(id string) *dto.DeleteExamResponse {
+	return &dto.DeleteExamResponse{
+		ID:      id,
+		Message: "Delete success",
+	}
+}

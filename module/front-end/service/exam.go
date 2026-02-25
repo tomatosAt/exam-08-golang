@@ -58,3 +58,13 @@ func (s *Service) CheckCorrectAnswer(choices []dto.CreateChoiceRequest) error {
 	}
 	return nil
 }
+
+func (s *Service) DeleteExamSVC(ctx context.Context, id string) (*dto.DeleteExamResponse, error) {
+	if err := s.repo.DB().Ctx().Transaction(func(tx *gorm.DB) error {
+		return s.repo.DeleteExamRepo(ctx, tx, id)
+	}); err != nil {
+		return nil, err
+	}
+	res := mapper.MapDeleteExamToResponse(id)
+	return res, nil
+}

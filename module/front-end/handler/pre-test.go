@@ -28,3 +28,12 @@ func (h *Handler) CreateExamHandler(ctx *fiber.Ctx) error {
 	}
 	return util.HttpSuccess(ctx, 200, res)
 }
+
+func (h *Handler) DeleteExamHandler(ctx *fiber.Ctx) error {
+	id := ctx.Params("id")
+	res, err := h.svc.DeleteExamSVC(ctx.Context(), id)
+	if err != nil {
+		return util.HttpError(ctx, 400, err.Error())
+	}
+	return util.HttpSuccess(ctx, 200, res)
+}
