@@ -23,5 +23,6 @@ func Create(app *app.Context) error {
 
 func addRouter(r fiber.Router, h *handler.Handler) {
 	v1 := r.Group("/v1")
-	v1.Get("", h.CheckHandler)
+	exam := v1.Group("/exams")
+	exam.Get("", h.GetAllExamHandler)
 }

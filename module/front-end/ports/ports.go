@@ -1,8 +1,13 @@
 package ports
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 	"github.com/tomatosAt/exam-08-golang/config"
+	"github.com/tomatosAt/exam-08-golang/model"
+	"github.com/tomatosAt/exam-08-golang/module/front-end/dto"
+	"gorm.io/gorm"
 )
 
 type Repository interface {
@@ -10,7 +15,9 @@ type Repository interface {
 	Module() string
 	Log() *logrus.Entry
 	DB() *config.Client
+	GetAllExamRepo(ctx context.Context, tx *gorm.DB, examList *[]model.Exam) error
 }
 
 type Service interface {
+	GetAllExamSVC(ctx context.Context) ([]dto.ExamResponse, error)
 }

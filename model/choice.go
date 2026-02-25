@@ -1,12 +1,12 @@
 package model
 
-import "gorm.io/gorm"
+import "github.com/google/uuid"
 
 type Choice struct {
-	gorm.Model
-	ExamID     uint   `gorm:"not null"`
-	ChoiceText string `gorm:"size:255;not null"`
-	IsCorrect  bool   `gorm:"default:false"`
+	Model
+	ExamID     uuid.UUID `gorm:"type:char(36);not null"`
+	ChoiceText string    `gorm:"size:255;not null"`
+	IsCorrect  bool      `gorm:"default:false"`
 }
 
 func (Choice) TableName() string {
