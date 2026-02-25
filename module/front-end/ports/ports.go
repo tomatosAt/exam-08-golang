@@ -16,8 +16,11 @@ type Repository interface {
 	Log() *logrus.Entry
 	DB() *config.Client
 	GetAllExamRepo(ctx context.Context, tx *gorm.DB, examList *[]model.Exam) error
+	CreateExamRepo(ctx context.Context, tx *gorm.DB, exam *model.Exam) error
+	CheckDuplicateQuestionRepo(ctx context.Context, question string) (bool, error)
 }
 
 type Service interface {
 	GetAllExamSVC(ctx context.Context) ([]dto.ExamResponse, error)
+	CreateExamSVC(ctx context.Context, req dto.CreateExamRequest) (*dto.NewExamToResponse, error)
 }

@@ -25,4 +25,5 @@ func addRouter(r fiber.Router, h *handler.Handler) {
 	v1 := r.Group("/v1")
 	exam := v1.Group("/exams")
 	exam.Get("", h.GetAllExamHandler)
+	exam.Post("", h.CreateExamHandler)
 }

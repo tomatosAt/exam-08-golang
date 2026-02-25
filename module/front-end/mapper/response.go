@@ -29,3 +29,22 @@ func MapListExamToResponse(e []model.Exam) []dto.ExamResponse {
 
 	return response
 }
+
+func MapNewExamToResponse(e *model.Exam) *dto.NewExamToResponse {
+
+	choices := make([]dto.ChoiceResponse, 0)
+
+	for _, c := range e.Choices {
+		choices = append(choices, dto.ChoiceResponse{
+			ID:         c.ID.String(),
+			ChoiceText: c.ChoiceText,
+			IsCorrect:  c.IsCorrect,
+		})
+	}
+
+	return &dto.NewExamToResponse{
+		ID:       e.ID.String(),
+		Question: e.Question,
+		Choices:  choices,
+	}
+}
